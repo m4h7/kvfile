@@ -1,0 +1,6 @@
+[package]
+name = "kvfile"
+version = "0.1.0"
+authors = ["mhg <mhg@urml.eu>"]
+
+[dependencies]
