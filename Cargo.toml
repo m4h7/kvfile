@@ -1,6 +1,7 @@
 [package]
 name = "kvfile"
 version = "0.1.0"
-authors = ["mhg <mhg@urml.eu>"]
+authors = ["m4h7"]
 
 [dependencies]
+memmap = "*"
