@@ -46,14 +46,14 @@ impl KVFileReader {
         let ptr = unsafe { self.m.as_slice() };
         let keylen = u8aletou32(&ptr[pos..pos + 4]) as usize;
         let valuelen = u8aletou32(&ptr[pos + 4..pos + 8]) as usize;
-        let mut newpos = pos + 4 + 4 + keylen + valuelen;
+        let newpos = pos + 4 + 4 + keylen + valuelen;
 
         let align = 4;
         if newpos % align != 0 {
-            let diff = align - (pos % align);
-            newpos += diff;
+            newpos + align - (pos % align)
+        } else {
+            newpos
         }
-        newpos
     }
 
     pub fn len(&self) -> usize {
