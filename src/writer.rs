@@ -35,7 +35,8 @@ impl KVFileWriter {
         let value_length = value.len() as u32;
         match self.f.write(&u32tou8ale(key_length)) {
             Ok(bwritten_k) => {
-                assert!(bwritten_k == key.len());
+                // u32 in bytes
+                assert!(bwritten_k == 4);
                 self.pos += bwritten_k;
 
                 match self.f.write(&u32tou8ale(value_length)) {
