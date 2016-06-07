@@ -41,7 +41,7 @@ impl KVFileWriter {
 
                 match self.f.write(&u32tou8ale(value_length)) {
                     Ok(bwritten_v) => {
-                        assert!(bwritten_v == value.len());
+                        assert!(bwritten_v == 4);
                         self.pos += bwritten_v;
                     }
                     Err(e) => panic!("error writing value {:}", Error::description(&e)),
