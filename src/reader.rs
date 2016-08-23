@@ -50,7 +50,7 @@ impl KVFileReader {
 
         let align = 4;
         if newpos % align != 0 {
-            newpos + align - (pos % align)
+            newpos + align - (newpos % align)
         } else {
             newpos
         }
