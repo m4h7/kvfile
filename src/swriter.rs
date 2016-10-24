@@ -7,13 +7,14 @@ use std::error::Error;
 pub struct SimpleWriter {
     f: File,
     pos: usize,
+    sync: bool,
 }
 
 impl SimpleWriter {
     pub fn create_file(s: &str) -> Result<SimpleWriter> {
         let path = Path::new(s);
         File::create(&path)
-            .map(|file| SimpleWriter { f: file, pos: 0 })
+            .map(|file| SimpleWriter { f: file, pos: 0, sync: false })
     }
 
     #[inline]
@@ -73,7 +74,9 @@ impl SimpleWriter {
 
     #[inline]
     pub fn sync(&mut self) {
-        self.f.sync_all();
+        if (self.sync) {
+            self.f.sync_all();
+        }
     }
 
     #[inline]
