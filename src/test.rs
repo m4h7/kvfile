@@ -61,24 +61,25 @@ fn test_table_rw() {
 
     {
         let mut tr = TableReader::open_file(filename).unwrap();
+        let mut pos = tr.start();
         for n in 1..100 {
-            assert!(!tr.eof());
-            assert!(tr.numcols() == 3);
-            let u = tr.u32le(0) as usize;
+            assert!(!tr.eof(pos));
+            assert!(tr.numcols(pos) == 3);
+            let u = tr.u32le(pos, 0) as usize;
             assert!(u == n);
             let es1 = format!("{}:{}", n, n + 1);
             let es2 = format!("{}:{}", n, n - 1);
             {
-                let s1 = tr.string(1);
+                let s1 = tr.string(pos, 1);
                 assert!(s1 == es1);
             }
             {
-                let s2 = tr.string(2);
+                let s2 = tr.string(pos, 2);
                 assert!(s2 == es2);
             }
-            tr.next();
+            pos = tr.next(pos);
         }
-        assert!(tr.eof());
+        assert!(tr.eof(pos));
     }
 
 }
