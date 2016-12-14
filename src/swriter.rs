@@ -74,7 +74,7 @@ impl SimpleWriter {
 
     #[inline]
     pub fn sync(&mut self) {
-        if (self.sync) {
+        if self.sync {
             self.f.sync_all();
         }
     }
